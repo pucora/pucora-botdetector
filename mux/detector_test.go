@@ -7,17 +7,17 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	velonetics "github.com/velonetics/velonetics-botdetector/v2/velonetics"
-	"github.com/velonetics/lura/v2/config"
-	"github.com/velonetics/lura/v2/logging"
-	"github.com/velonetics/lura/v2/proxy"
-	luramux "github.com/velonetics/lura/v2/router/mux"
+	pucora "github.com/pucora/velonetics-botdetector/v2/pucora"
+	"github.com/pucora/lura/v2/config"
+	"github.com/pucora/lura/v2/logging"
+	"github.com/pucora/lura/v2/proxy"
+	luramux "github.com/pucora/lura/v2/router/mux"
 )
 
 func TestRegister(t *testing.T) {
 	cfg := config.ServiceConfig{
 		ExtraConfig: config.ExtraConfig{
-			velonetics.Namespace: map[string]interface{}{
+			pucora.Namespace: map[string]interface{}{
 				"deny":  []interface{}{"a", "b"},
 				"allow": []interface{}{"c", "Pingdom.com_bot_version_1.1"},
 				"patterns": []interface{}{
@@ -45,7 +45,7 @@ func TestNew(t *testing.T) {
 	cfg := &config.EndpointConfig{
 		Method: "GET",
 		ExtraConfig: config.ExtraConfig{
-			velonetics.Namespace: map[string]interface{}{
+			pucora.Namespace: map[string]interface{}{
 				"deny":  []interface{}{"a", "b"},
 				"allow": []interface{}{"c", "Pingdom.com_bot_version_1.1"},
 				"patterns": []interface{}{

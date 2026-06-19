@@ -4,12 +4,12 @@ import (
 	"errors"
 	"net/http"
 
-	botdetector "github.com/velonetics/velonetics-botdetector/v2"
-	velonetics "github.com/velonetics/velonetics-botdetector/v2/velonetics"
-	"github.com/velonetics/lura/v2/config"
-	"github.com/velonetics/lura/v2/logging"
-	"github.com/velonetics/lura/v2/proxy"
-	luramux "github.com/velonetics/lura/v2/router/mux"
+	botdetector "github.com/pucora/velonetics-botdetector/v2"
+	pucora "github.com/pucora/velonetics-botdetector/v2/pucora"
+	"github.com/pucora/lura/v2/config"
+	"github.com/pucora/lura/v2/logging"
+	"github.com/pucora/lura/v2/proxy"
+	luramux "github.com/pucora/lura/v2/router/mux"
 )
 
 // New checks the configuration and, if required, wraps the handler factory with a bot detector middleware
@@ -17,8 +17,8 @@ func New(hf luramux.HandlerFactory, l logging.Logger) luramux.HandlerFactory {
 	return func(cfg *config.EndpointConfig, p proxy.Proxy) http.HandlerFunc {
 		next := hf(cfg, p)
 
-		detectorCfg, err := velonetics.ParseConfig(cfg.ExtraConfig)
-		if err == velonetics.ErrNoConfig {
+		detectorCfg, err := pucora.ParseConfig(cfg.ExtraConfig)
+		if err == pucora.ErrNoConfig {
 			l.Debug("botdetector: ", err.Error())
 			return next
 		}
@@ -56,8 +56,8 @@ type middleware struct {
 
 // NewMiddleware checks the configuration and, if required, registers a bot detector middleware at the mux engine
 func NewMiddleware(cfg config.ExtraConfig, l logging.Logger) luramux.HandlerMiddleware {
-	detectorCfg, err := velonetics.ParseConfig(cfg)
-	if err == velonetics.ErrNoConfig {
+	detectorCfg, err := pucora.ParseConfig(cfg)
+	if err == pucora.ErrNoConfig {
 		l.Debug("botdetector middleware: ", err.Error())
 		return nil
 	}

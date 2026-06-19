@@ -5,20 +5,20 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	botdetector "github.com/velonetics/velonetics-botdetector/v2"
-	velonetics "github.com/velonetics/velonetics-botdetector/v2/velonetics"
-	"github.com/velonetics/lura/v2/config"
-	"github.com/velonetics/lura/v2/logging"
-	"github.com/velonetics/lura/v2/proxy"
-	veloneticsgin "github.com/velonetics/lura/v2/router/gin"
+	botdetector "github.com/pucora/velonetics-botdetector/v2"
+	pucora "github.com/pucora/velonetics-botdetector/v2/pucora"
+	"github.com/pucora/lura/v2/config"
+	"github.com/pucora/lura/v2/logging"
+	"github.com/pucora/lura/v2/proxy"
+	veloneticsgin "github.com/pucora/lura/v2/router/gin"
 )
 
 const logPrefix = "[SERVICE: Gin][Botdetector]"
 
 // Register checks the configuration and, if required, registers a bot detector middleware at the gin engine
 func Register(cfg config.ServiceConfig, l logging.Logger, engine *gin.Engine) {
-	detectorCfg, err := velonetics.ParseConfig(cfg.ExtraConfig)
-	if err == velonetics.ErrNoConfig {
+	detectorCfg, err := pucora.ParseConfig(cfg.ExtraConfig)
+	if err == pucora.ErrNoConfig {
 		return
 	}
 	if err != nil {
@@ -41,8 +41,8 @@ func New(hf veloneticsgin.HandlerFactory, l logging.Logger) veloneticsgin.Handle
 		next := hf(cfg, p)
 		logPrefix := "[ENDPOINT: " + cfg.Endpoint + "][Botdetector]"
 
-		detectorCfg, err := velonetics.ParseConfig(cfg.ExtraConfig)
-		if err == velonetics.ErrNoConfig {
+		detectorCfg, err := pucora.ParseConfig(cfg.ExtraConfig)
+		if err == pucora.ErrNoConfig {
 			return next
 		}
 		if err != nil {
