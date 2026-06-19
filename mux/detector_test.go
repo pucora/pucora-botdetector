@@ -7,7 +7,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	pucora "github.com/pucora/velonetics-botdetector/v2/pucora"
+	pucora "github.com/pucora/pucora-botdetector/v2/pucora"
 	"github.com/pucora/lura/v2/config"
 	"github.com/pucora/lura/v2/logging"
 	"github.com/pucora/lura/v2/proxy"

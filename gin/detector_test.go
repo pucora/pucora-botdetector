@@ -8,11 +8,11 @@ import (
 	"testing"
 
 	"github.com/gin-gonic/gin"
-	pucora "github.com/pucora/velonetics-botdetector/v2/pucora"
+	pucora "github.com/pucora/pucora-botdetector/v2/pucora"
 	"github.com/pucora/lura/v2/config"
 	"github.com/pucora/lura/v2/logging"
 	"github.com/pucora/lura/v2/proxy"
-	veloneticsgin "github.com/pucora/lura/v2/router/gin"
+	pucoragin "github.com/pucora/lura/v2/router/gin"
 )
 
 func TestRegister(t *testing.T) {
@@ -66,7 +66,7 @@ func TestNew(t *testing.T) {
 		return &proxy.Response{IsComplete: true}, nil
 	}
 
-	engine.GET("/", New(veloneticsgin.EndpointHandler, logging.NoOp)(cfg, proxyfunc))
+	engine.GET("/", New(pucoragin.EndpointHandler, logging.NoOp)(cfg, proxyfunc))
 
 	if err := testDetection(engine); err != nil {
 		t.Error(err)

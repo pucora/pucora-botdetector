@@ -1,2 +1,2 @@
-# velonetics-botdetector
+# pucora-botdetector
 A bot detector middleware for the Pucora framework

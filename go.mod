@@ -1,4 +1,4 @@
-module github.com/pucora/velonetics-botdetector/v2
+module github.com/pucora/pucora-botdetector/v2
 
 go 1.24.0
 

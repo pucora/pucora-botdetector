@@ -4,12 +4,12 @@ import (
 	"encoding/json"
 	"errors"
 
-	botdetector "github.com/pucora/velonetics-botdetector/v2"
+	botdetector "github.com/pucora/pucora-botdetector/v2"
 	"github.com/pucora/lura/v2/config"
 )
 
 // Namespace is the key used to store the bot detector config at the ExtraConfig struct
-const Namespace = "github_com/pucora/velonetics-botdetector"
+const Namespace = "github_com/pucora/pucora-botdetector"
 
 // ErrNoConfig is returned when there is no config defined for the module
 var ErrNoConfig = errors.New("no config defined for the module")

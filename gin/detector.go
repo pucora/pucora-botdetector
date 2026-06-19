@@ -5,12 +5,12 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	botdetector "github.com/pucora/velonetics-botdetector/v2"
-	pucora "github.com/pucora/velonetics-botdetector/v2/pucora"
+	botdetector "github.com/pucora/pucora-botdetector/v2"
+	pucora "github.com/pucora/pucora-botdetector/v2/pucora"
 	"github.com/pucora/lura/v2/config"
 	"github.com/pucora/lura/v2/logging"
 	"github.com/pucora/lura/v2/proxy"
-	veloneticsgin "github.com/pucora/lura/v2/router/gin"
+	pucoragin "github.com/pucora/lura/v2/router/gin"
 )
 
 const logPrefix = "[SERVICE: Gin][Botdetector]"
@@ -36,7 +36,7 @@ func Register(cfg config.ServiceConfig, l logging.Logger, engine *gin.Engine) {
 }
 
 // New checks the configuration and, if required, wraps the handler factory with a bot detector middleware
-func New(hf veloneticsgin.HandlerFactory, l logging.Logger) veloneticsgin.HandlerFactory {
+func New(hf pucoragin.HandlerFactory, l logging.Logger) pucoragin.HandlerFactory {
 	return func(cfg *config.EndpointConfig, p proxy.Proxy) gin.HandlerFunc {
 		next := hf(cfg, p)
 		logPrefix := "[ENDPOINT: " + cfg.Endpoint + "][Botdetector]"
